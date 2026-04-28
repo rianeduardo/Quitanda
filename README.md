@@ -258,7 +258,7 @@ Pode Existir Restrições para o Negócio (legais, locais ...)
 
 ## 5. Modelos do Sistema
 
-### 5.1 Diagrama de Cados de Uso
+### 5.1 Diagrama de Casos de Uso
 
 Diagrama de Casos de Uso: O que o sistema deve fazer do ponto de vista do Usuário
 
@@ -270,3 +270,88 @@ flowchart LR
     Estoquista --> UC3[Consultar Estoque]
     Estoquista --> UC4[Consultar Movimentações]
 ```
+
+---
+
+### 5.2 Diagrama de Classes UML
+
+Diagrama de Classes UML: Estrutura do código, classes, atributos e métodos
+
+```mermaid
+
+classDiagram
+
+  class Produto {
+    - id
+    - nome
+    - categoria
+    - preço
+    - quantidade
+
+    +venda(nome, quantidade, precoTotal)
+    +entrada(nome, quantidade, preco)
+  }
+
+  class QuitandaModel {
+    +addProduto(Produto)
+    +sellProduto(Produto)
+  }
+
+  class QuitandaView {
+    +renderEstoque()
+    +renderVenda()
+  }
+
+  class QuitandaController {
+    +handleAddProduto()
+    +handleSellProduto()
+    +handleUpdateProduto()
+    +handleUpdateEstoque()
+    +handleRegistraMovimentacao()
+  }
+
+  QuitandaController --> QuitandaModel
+  QuitandaController --> QuitandaView
+  QuitandaModel --> Produto
+```
+
+---
+
+### 5.3 Diagrama de Sequência
+
+Diagrama de Sequência: Interação entre objetos ao longo do tempo, para realizar uma funcionalidade específica
+
+#### 5.3.1 Venda
+
+```mermaid
+
+sequenceDiagram
+
+  Usuário ->> Controller:Solicitar [VENDA]
+  Controller ->> Model:Atualizar [ESTOQUE]
+  Model ->> Controller:Retorno
+  Controller ->> View:Atualizar [INTERFACE]
+```
+
+## 6. Matriz de Análise de Risco
+
+| Risco | Impacto | Mitigação |
+| ----- | ------- | --------- |
+| Perda de Dados | **Alta** | Uso de LocalStorage/DB (Persistência de Dados) |
+| Entrada de Dados | **Médio** | Validação de entradas |
+
+---
+
+## 7. Controle de Versões
+
+### 7.1 Histórico de Alterações
+
+| Versão | Data | Autor | Modificações |
+| - | - | - | - |
+| 1.0.0 | 2026-04-28 | @rianeduardo | Init
+
+### 7.2 Aprovações
+
+| Papel | Nome | Data | Assinatura |
+| - | - | - | - |
+| Stakeholder | José Joaquim | 2026-04-28 | [ASS.] 
