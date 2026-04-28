@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistema de Gestão de Quitanda</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background: linear-gradient(135deg, #1a1a2e, #16213e);
+        color: #e8e8e8;
+        font-family: "Lexend", sans-serif;
+        margin: 0;
+        padding: 20px;
+        min-height: 100vh;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      h1 {
+        text-align: center;
+        color: #a8dadc;
+        font-weight: 700;
+        margin-bottom: 30px;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      }
+      .section {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 30px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      h2 {
+        color: #f7dc6f;
+        font-weight: 500;
+        margin-bottom: 15px;
+        border-bottom: 2px solid #a8dadc;
+        padding-bottom: 15px;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+      form label {
+        font-weight: 500;
+        color: #d5f4e6;
+        margin-bottom: 5px;
+        display: block;
+      }
+      form div {
+        margin-bottom: 10px;
+      }
+      form input {
+        padding: 10px;
+        border: none;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.1);
+        color: #e8e8e8;
+        font-size: 14px;
+      }
+      form input:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px #a8dadc;
+      }
+      form button {
+        background: #1a1a2e;
+        width: 100%;
+        color: #ffffff;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 800;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+        align-self: center;
+        border: solid 1px #979797;
+      }
+      form button:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 15px rgba(168, 218, 220, 0.1);
+        border: dashed 1px #979797;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+      li {
+        background: rgba(255, 255, 255, 0.05);
+        margin-bottom: 10px;
+        padding: 15px;
+        border-radius: 8px;
+        border-left: 4px solid #f7dc6f;
+        font-size: 14px;
+      }
+      li:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      /* Só pra tirar as setinhas dos inputs de número */
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Sistema de Gestão de Quitanda | Quitanda do Rian</h1>
+
+      <!-- Cards -->
+      <div class="section">
+        <h2>
+          <i class="fa-solid fa-box" style="color: rgb(247, 220, 111)"></i>
+          Cadastrar Produto
+        </h2>
+        <form id="formProduto">
+          <div>
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" placeholder="Ex: Alface" required />
+          </div>
+          <div>
+            <label for="descricao">Descrição:</label>
+            <input
+              type="text"
+              id="descricao"
+              placeholder="Ex: Verdura fresca"
+              required
+            />
+          </div>
+          <div>
+            <label for="preco">Preço:</label>
+            <input
+              type="number"
+              step="0.01"
+              id="preco"
+              placeholder="Ex: 2.50"
+              required
+            />
+          </div>
+          <div>
+            <label for="quantidade">Quantidade:</label>
+            <input
+              type="number"
+              id="quantidade"
+              placeholder="Ex: 10"
+              required
+            />
+          </div>
+          <div>
+            <label for="categoria">Categoria:</label>
+            <input
+              type="text"
+              id="categoria"
+              placeholder="Ex: Verduras"
+              required
+            />
+          </div>
+          <button type="submit">Cadastrar Produto</button>
+        </form>
+      </div>
+
+      <div class="section">
+        <h2>
+          <i
+            class="fa-solid fa-right-to-bracket"
+            style="color: rgb(247, 220, 111)"
+          ></i>
+          Registrar Entrada
+        </h2>
+        <form id="formEntrada">
+          <div>
+            <label for="idEntrada">ID Produto:</label>
+            <input type="number" id="idEntrada" placeholder="Ex: 1" required />
+          </div>
+          <div>
+            <label for="quantidadeEntrada">Quantidade:</label>
+            <input
+              type="number"
+              id="quantidadeEntrada"
+              placeholder="Ex: 5"
+              required
+            />
+          </div>
+          <div>
+            <label for="fornecedor">Fornecedor:</label>
+            <input
+              type="text"
+              id="fornecedor"
+              placeholder="Ex: Distribuidora XYZ"
+            />
+          </div>
+          <div>
+            <label for="observacoes">Observações:</label>
+            <input
+              type="text"
+              id="observacoes"
+              placeholder="Ex: Entrega semanal"
+            />
+          </div>
+          <button type="submit">Registrar Entrada</button>
+        </form>
+      </div>
+
+      <div class="section">
+        <h2>
+          <i
+            class="fa-solid fa-colon-sign"
+            style="color: rgb(247, 220, 111)"
+          ></i>
+          Registrar Saída
+        </h2>
+        <form id="formSaida">
+          <div>
+            <label for="idSaida">ID Produto:</label>
+            <input type="number" id="idSaida" placeholder="Ex: 1" required />
+          </div>
+          <div>
+            <label for="quantidadeSaida">Quantidade:</label>
+            <input
+              type="number"
+              id="quantidadeSaida"
+              placeholder="Ex: 2"
+              required
+            />
+          </div>
+          <div>
+            <label for="cliente">Cliente:</label>
+            <input type="text" id="cliente" placeholder="Ex: João Silva" />
+          </div>
+          <div>
+            <label for="tipoVenda">Tipo Venda:</label>
+            <input type="text" id="tipoVenda" placeholder="Ex: Varejo" />
+          </div>
+          <button type="submit">Registrar Saída</button>
+        </form>
+      </div>
+
+      <div class="section">
+        <h2>
+          <i
+            class="fa-solid fa-cart-shopping"
+            style="color: rgb(247, 220, 111)"
+          ></i>
+          Produtos
+        </h2>
+        <ul id="listaProdutos"></ul>
+      </div>
+
+      <div class="section">
+        <h2>
+          <i
+            class="fa-solid fa-chart-simple"
+            style="color: rgb(247, 220, 111)"
+          ></i>
+          Movimentações
+        </h2>
+        <ul id="listaMovimentacoes"></ul>
+      </div>
+    </div>
+
+    <!-- Handler -->
+    <script type="module" src="handlerView.js"></script>
+    <!-- Meu kitzinho do font awesome -->
+    <script
+      src="https://kit.fontawesome.com/9e07d1881e.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
