@@ -11,6 +11,11 @@ function buscarProdutoPorId(id) {
   return produtos.find(produto => produto.id === id);
 }
 
+function produtoExiste(nome) {
+  const produtos = controller.listarProdutos();
+  return produtos.some(produto => produto.nome.toLowerCase() === nome.toLowerCase());
+}
+
 function validarNumero(valor, nomeCampo) {
   if (valor === '' || Number.isNaN(valor)) {
     exibirAlerta(`Por favor informe um valor válido para ${nomeCampo}.`);
@@ -31,6 +36,11 @@ document.getElementById('formProduto').addEventListener('submit', (e) => {
 
   if (!nome || !descricao || !categoria) {
     exibirAlerta('Nome, descrição e categoria são obrigatórios.');
+    return;
+  }
+
+  if (produtoExiste(nome)) {
+    exibirAlerta('Já existe um produto com esse nome.');
     return;
   }
 
