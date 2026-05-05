@@ -14,7 +14,9 @@ export class QuitandaController {
     return this.model.readProdutos();
   }
 
-  // Métodos para movimentações
+  deletarProduto(id) {
+    this.model.deleteProduto(parseInt(id));
+  }
   registrarEntrada(id, quantidade, fornecedor, observacoes) {
     this.model.entradaProduto(parseInt(id), parseInt(quantidade), fornecedor, observacoes);
   }

@@ -69,6 +69,7 @@ document.getElementById('formEntrada').addEventListener('submit', (e) => {
   }
 
   const produto = buscarProdutoPorId(id);
+  console.log('Produto encontrado para entrada:', produto);
   if (!produto) {
     exibirAlerta('Produto não encontrado. Verifique o ID informado.');
     return;
@@ -122,7 +123,34 @@ function atualizarProdutos() {
   lista.innerHTML = '';
   produtos.forEach(produto => {
     const li = document.createElement('li');
-    li.textContent = `ID: ${produto.id}, Nome: ${produto.nome}, Descrição: ${produto.descricao}, Preço: ${produto.preco}, Estoque: ${produto.estoque}, Categoria: ${produto.categoria}`;
+    li.style.display = 'flex';
+    li.style.justifyContent = 'space-between';
+    li.style.alignItems = 'center';
+
+    const info = document.createElement('span');
+    info.textContent = `ID: ${produto.id}, Nome: ${produto.nome}, Descrição: ${produto.descricao}, Preço: ${produto.preco}, Estoque: ${produto.estoque}, Categoria: ${produto.categoria}`;
+
+    const deleteBtn = document.createElement('button');
+    deleteBtn.innerHTML = '<i class="fa-solid fa-trash"></i>';
+    deleteBtn.style.width = '30px';
+    deleteBtn.style.height = '30px';
+    deleteBtn.style.backgroundColor = '#ff4a4a';
+    deleteBtn.style.border = 'none';
+    deleteBtn.style.borderRadius = '4px';
+    deleteBtn.style.cursor = 'pointer';
+    deleteBtn.style.display = 'flex';
+    deleteBtn.style.alignItems = 'center';
+    deleteBtn.style.justifyContent = 'center';
+    deleteBtn.style.color = 'white';
+    deleteBtn.onclick = () => {
+      if (confirm(`Tem certeza que deseja deletar o produto "${produto.nome}"?`)) {
+        controller.deletarProduto(produto.id);
+        atualizarProdutos();
+      }
+    };
+
+    li.appendChild(info);
+    li.appendChild(deleteBtn);
     lista.appendChild(li);
   });
 }
