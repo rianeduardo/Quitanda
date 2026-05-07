@@ -114,11 +114,106 @@
         -webkit-appearance: none;
         margin: 0;
       }
+
+      .dashboard {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 18px;
+        margin-bottom: 30px;
+      }
+
+      .dashboard-card {
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 18px;
+        padding: 22px;
+        min-height: 140px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.18);
+      }
+      .dashboard-card h3 {
+        font-size: 0.95rem;
+        margin: 0;
+        color: #f7dc6f;
+      }
+      .dashboard-card .value {
+        font-size: 2rem;
+        font-weight: 800;
+        margin-top: 12px;
+        color: #ffffff;
+        word-break: break-word;
+      }
+      .dashboard-card .description {
+        font-size: 0.9rem;
+        color: #c5dbe8;
+        margin-top: 8px;
+      }
+      .dashboard-card .icon {
+        font-size: 1.4rem;
+        color: #a8dadc;
+        margin-bottom: 12px;
+      }
+      .badge-low-stock {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: rgba(255, 81, 81, 0.16);
+        color: #ff8b8b;
+        font-size: 0.85rem;
+        font-weight: 700;
+        border: 1px solid rgba(255, 81, 81, 0.3);
+        margin-left: 12px;
+      }
     </style>
   </head>
   <body>
     <div class="container">
       <h1>Sistema de Gestão de Quitanda | Quitanda do Rian</h1>
+
+      <div class="dashboard">
+        <div class="dashboard-card">
+          <div>
+            <div class="icon"><i class="fa-solid fa-seedling"></i></div>
+            <h3>Total de produtos</h3>
+          </div>
+          <div class="value" id="cardTotalProdutos">0</div>
+          <div class="description">Quantidade de itens cadastrados na quitanda.</div>
+        </div>
+        <div class="dashboard-card">
+          <div>
+            <div class="icon"><i class="fa-solid fa-boxes-stacked"></i></div>
+            <h3>Total em estoque</h3>
+          </div>
+          <div class="value" id="cardTotalEstoque">0</div>
+          <div class="description">Unidades disponíveis em todas as categorias.</div>
+        </div>
+        <div class="dashboard-card">
+          <div>
+            <div class="icon"><i class="fa-solid fa-layer-group"></i></div>
+            <h3>Categorias ativas</h3>
+          </div>
+          <div class="value" id="cardCategorias">0</div>
+          <div class="description">Categorias diferentes de produtos cadastrados.</div>
+        </div>
+        <div class="dashboard-card">
+          <div>
+            <div class="icon"><i class="fa-solid fa-crown"></i></div>
+            <h3>Produto mais caro</h3>
+          </div>
+          <div class="value" id="cardProdutoMaisCaro">Nenhum</div>
+          <div class="description">O item com maior preço entre os cadastrados.</div>
+        </div>
+        <div class="dashboard-card">
+          <div>
+            <div class="icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+            <h3>Estoque crítico</h3>
+          </div>
+          <div class="value" id="cardEstoqueCritico">0</div>
+          <div class="description">Produtos com estoque menor ou igual a 5 unidades.</div>
+        </div>
+      </div>
 
       <!-- Cards -->
       <div class="section">

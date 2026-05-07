@@ -16,6 +16,28 @@ function produtoExiste(nome) {
   return produtos.some(produto => produto.nome.toLowerCase() === nome.toLowerCase());
 }
 
+function atualizarDashboard() {
+  const produtos = controller.listarProdutos();
+  const totalProdutos = produtos.length;
+  const totalEstoque = produtos.reduce((soma, produto) => soma + produto.estoque, 0);
+  const categorias = [...new Set(produtos
+    .map(produto => produto.categoria.trim().toLowerCase())
+    .filter(categoria => categoria !== ''))].length;
+  const produtoMaisCaro = produtos.reduce((maisCaro, produto) => {
+    if (!maisCaro || produto.preco > maisCaro.preco) return produto;
+    return maisCaro;
+  }, null);
+  const estoqueCritico = produtos.filter(produto => produto.estoque > 0 && produto.estoque <= 5).length;
+
+  document.getElementById('cardTotalProdutos').textContent = totalProdutos;
+  document.getElementById('cardTotalEstoque').textContent = totalEstoque;
+  document.getElementById('cardCategorias').textContent = categorias;
+  document.getElementById('cardProdutoMaisCaro').textContent = produtoMaisCaro
+    ? `${produtoMaisCaro.nome} (${produtoMaisCaro.preco.toFixed(2)})`
+    : 'Nenhum';
+  document.getElementById('cardEstoqueCritico').textContent = estoqueCritico;
+}
+
 function validarNumero(valor, nomeCampo) {
   if (valor === '' || Number.isNaN(valor)) {
     exibirAlerta(`Por favor informe um valor válido para ${nomeCampo}.`);
@@ -140,6 +162,18 @@ function atualizarProdutos() {
     const info = document.createElement('span');
     info.textContent = `ID: ${produto.id}, Nome: ${produto.nome}, Descrição: ${produto.descricao}, Preço: ${produto.preco}, Estoque: ${produto.estoque}, Categoria: ${produto.categoria}`;
 
+    if (produto.estoque > 0 && produto.estoque <= 5) {
+      const badge = document.createElement('span');
+      badge.className = 'badge-low-stock';
+      badge.textContent = 'Estoque baixo';
+      info.appendChild(badge);
+    } else if (produto.estoque === 0) {
+      const badge = document.createElement('span');
+      badge.className = 'badge-low-stock';
+      badge.textContent = 'Esgotado';
+      info.appendChild(badge);
+    }
+
     const deleteBtn = document.createElement('button');
     deleteBtn.innerHTML = '<i class="fa-solid fa-trash"></i>';
     deleteBtn.style.width = '30px';
@@ -163,6 +197,7 @@ function atualizarProdutos() {
     li.appendChild(deleteBtn);
     lista.appendChild(li);
   });
+  atualizarDashboard();
 }
 
 function formatarTipoVenda(tipoVenda) {
@@ -220,6 +255,7 @@ function atualizarMovimentacoes() {
   });
 }
 
-// Inicializar listas
+// Inicializar listas e dashboard
 atualizarProdutos();
 atualizarMovimentacoes();
+atualizarDashboard();
